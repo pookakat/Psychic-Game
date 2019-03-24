@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+</head>
+<body>
+    <h1>The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <p>Wins:<div id="wins"></div></p>
+    <p>Losses:<div id="losses"></div></p>
+    <p>Guesses Left:<div id="guessesLeft"></div></p>
+    <p>Your Guesses so far:<div id="lettersGuessed"></div></p>
+    <script>
+        var letters='abcdefghijklmnopqrstuvwxyz'.split('');
+        i=Math.floor(Math.random()*26);
+        cchoice = letters[i];
+        var w=0;
+        var l=0;
+        var gl=10;
+        var g=[];
+        document.addEventListener("keydown", function(e){
+            document.getElementById("wins").innerHTML = w;
+            document.getElementById("losses").innerHTML = l;
+            document.getElementById("guessesLeft").innerHTML = gl;
+            document.getElementById("lettersGuessed").innerHTML = g;
+            if (w===5 || l===5 || gl===0){
+                if (w===5){
+                    alert("You win!");
+                }
+                else if (l===5) {
+                    alert("You lose!");
+                }
+                else if (gl===0){
+                    l++;
+                    gl=10;
+                    g=[];
+                    i=Math.floor(Math.random()*26);
+                    cchoice = letters[i];
+                }
+            }
+            else{
+                let x= e.key;
+                if(x===cchoice){
+                    alert("You got it!");
+                    i=Math.floor(Math.random()*26);
+                    cchoice = letters[i];
+                    w++;
+                    gl=10;
+                    g=[];
+                }
+                else{
+                gl--;
+                g.push(x);
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
